@@ -1,0 +1,20 @@
+# Dockerfile for database consumer
+# basic python image
+FROM python:3
+
+# install pika to access rabbitmq
+RUN pip3 install pika
+RUN pip3 install requests
+RUN pip3 install flask
+
+# Without this setting, Python never prints anything out.
+ENV PYTHONUNBUFFERED=1
+
+# declare the source directory
+WORKDIR /home/chakita/cclab/CloudHack_2/app/database
+
+# copy the file
+COPY database_consumer.py .
+
+# start command
+CMD [ "python3", "database_consumer.py" ]
